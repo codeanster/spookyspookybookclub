@@ -1,0 +1,70 @@
+.glitch-text {
+    position: relative;
+    color: transparent; /* Make the text initially invisible */
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    display: inline-block;
+    overflow: hidden;
+    animation: glitch-in 10s infinite; /* Add an animation to glitch the text in */
+  }
+  
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #ff00c1;
+    background: black;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    opacity: 0; /* Start pseudo-elements as invisible */
+    animation: glitch-in 1s infinite alternate-reverse; /* Apply animation to glitch into view */
+  }
+  
+  .glitch-text::before {
+    left: 2px;
+    text-shadow: -2px 0 red;
+    animation: glitch-in 3s infinite alternate-reverse; /* Slightly different duration for added effect */
+  }
+  
+  .glitch-text::after {
+    left: -2px;
+    text-shadow: -2px 0 blue;
+    animation: glitch-in 1s infinite alternate-reverse; /* Another unique duration */
+  }
+  
+  /* Define the glitch-in animation */
+  @keyframes glitch-in {
+    0% {
+      clip: rect(0, 900px, 0, 0);
+      transform: skew(0.3deg);
+      opacity: 0; /* Start fully transparent */
+    }
+    20% {
+      clip: rect(12px, 9999px, 94px, 0);
+      transform: skew(0.6deg);
+      opacity: 0.2; /* Slightly visible */
+    }
+    40% {
+      clip: rect(62px, 9999px, 24px, 0);
+      transform: skew(0.9deg);
+      opacity: 0.4; /* More visible */
+    }
+    60% {
+      clip: rect(22px, 9999px, 64px, 0);
+      transform: skew(0.2deg);
+      opacity: 0.6; /* Even more visible */
+    }
+    80% {
+      clip: rect(12px, 9999px, 84px, 0);
+      transform: skew(1.2deg);
+      opacity: 0.8; /* Almost fully visible */
+    }
+    /* 100% {
+      clip: rect(82px, 9999px, 34px, 0);
+      transform: skew(0.4deg);
+      opacity: 1; /* Fully visible */
+    
+  }
+  
