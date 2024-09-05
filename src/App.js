@@ -40,7 +40,7 @@ export default function SpookySpookyBookClubLandingPage() {
     e.preventDefault();
     setSubmissionStatus(null);
     try {
-      const response = await axios.post('https://k67t787b4l.execute-api.us-west-1.amazonaws.com/Prod/subscribe', {
+      await axios.post('https://k67t787b4l.execute-api.us-west-1.amazonaws.com/Prod/subscribe', {
         name,
         email
       });
