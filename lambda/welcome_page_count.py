@@ -47,6 +47,7 @@ def lambda_handler(event, context):
     db_name = os.environ.get('DB_NAME')
     db_user = os.environ.get('DB_USER')
     db_password = os.environ.get('DB_PASSWORD')
+    logger.info(f"Connecting to database at host: {db_host} with user: {db_user}")
 
     # Validate environment variables
     if not all([db_host, db_name, db_user, db_password]):
