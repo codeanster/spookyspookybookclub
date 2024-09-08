@@ -24,7 +24,7 @@ const Modal = ({ isOpen, onClose, onConfirm }) => {
       const timer = setTimeout(() => setCurrentMessage(currentMessage + 1), 3000);
       return () => clearTimeout(timer);
     }
-  }, [showMessage, currentMessage]);
+  }, [showMessage, currentMessage, messages.length]); // Add messages.length to dependencies
 
   if (!isOpen) return null;
 
@@ -77,4 +77,3 @@ const Modal = ({ isOpen, onClose, onConfirm }) => {
 };
 
 export default Modal;
-

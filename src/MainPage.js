@@ -38,9 +38,8 @@ function MainPage({ showModal }) {
       // Set up the headers for the API call
       const headers = {
         'Content-Type': 'application/json',
-        'User-Agent': navigator.userAgent, // Sending user agent to the server
       };
-      axios.post('https://k67t787b4l.execute-api.us-west-1.amazonaws.com/Prod/welcome', {})
+      axios.post('https://k67t787b4l.execute-api.us-west-1.amazonaws.com/Prod/welcome', {}, { headers })
         .then(response => console.log('API call successful:', response.data))
         .catch(error => console.error('Error making API call:', error));
     }

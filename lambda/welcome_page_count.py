@@ -3,6 +3,7 @@ import psycopg2
 import logging
 import hashlib
 import time
+from datetime import datetime, timedelta
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -34,6 +35,15 @@ def lambda_handler(event, context):
         'Access-Control-Allow-Methods': 'OPTIONS,POST'
     }
 
+    # Ensure event has the necessary keys
+    if not event or 'httpMethod' not in event or 'headers' not in event:
+        logger.error("Invalid input: Missing necessary keys.")
+        return {
+            'statusCode': 400,
+            'headers': headers,
+            'body': 'Bad Request: Missing necessary keys in the input.'
+        }
+
     # Handle preflight (OPTIONS) request
     if event['httpMethod'] == 'OPTIONS':
         return {
@@ -47,7 +57,6 @@ def lambda_handler(event, context):
     db_name = os.environ.get('DB_NAME')
     db_user = os.environ.get('DB_USER')
     db_password = os.environ.get('DB_PASSWORD')
-    logger.info(f"Connecting to database at host: {db_host} with user: {db_user}")
 
     # Validate environment variables
     if not all([db_host, db_name, db_user, db_password]):
@@ -71,7 +80,7 @@ def lambda_handler(event, context):
     user_agent = event['headers'].get('User-Agent', 'unknown')
 
     # Retrieve the IP address (from a proxy or directly from the request)
-    ip_address = event['headers'].get('X-Forwarded-For', 'unknown')  # Assuming you're behind a load balancer or reverse proxy
+    ip_address = event['headers'].get('X-Forwarded-For', 'unknown').split(',')[0].strip()  # Take the first IP if multiple are provided
 
     # Generate a session ID for this visit
     session_id = generate_session_id(user_agent)
@@ -88,6 +97,24 @@ def lambda_handler(event, context):
             password=db_password
         ) as conn:
             with conn.cursor() as cur:
+                # SQL to check if a record with the same visitor_hash exists in the last 5 seconds
+                check_sql = """
+                SELECT COUNT(*) FROM visit_log 
+                WHERE visitor_hash = %s 
+                AND visit_timestamp > NOW() - INTERVAL '5 seconds';
+                """
+                cur.execute(check_sql, (visitor_hash,))
+                result = cur.fetchone()
+
+                if result[0] > 0:
+                    # If a recent visit exists, skip insertion
+                    logger.info('Duplicate visit detected within 5 seconds. Skipping insertion.')
+                    return {
+                        'statusCode': 200,
+                        'headers': headers,
+                        'body': 'Duplicate visit detected. No new visit logged.'
+                    }
+
                 # SQL to insert a new visit record
                 insert_sql = """
                 INSERT INTO visit_log (url, browser_type, session_id, visitor_hash)
