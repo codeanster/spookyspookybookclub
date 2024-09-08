@@ -96,19 +96,6 @@
   margin-bottom: 20px;
 }
 
-/* Ensure all cards are the same size */
-.card {
-  flex-grow: 1; /* Allow the card to grow to fill the grid space */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  padding: 1rem;
-  background-color: #1e2029;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
 
 /* Ensure the grid container forces all children to be the same height */
 .grid {
@@ -144,4 +131,20 @@ body {
 
 .bg-gradient-to-b {
   background-color: #1b1d24 !important; /* Dark background color */
+}
+
+
+/* Ensure all cards are the same size */
+.card {
+  flex-grow: 1; /* Allow the card to grow to fill the grid space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  background-color: #1e2029;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 2px solid rgb(12, 11, 12); /* Adds a pink border */
 }

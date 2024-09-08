@@ -5,7 +5,7 @@ import { Input } from "./input";
 
 const JoinUsSection = ({ joinSectionRef, handleSubmit, name, setName, email, setEmail, submissionStatus }) => {
   return (
-    <section ref={joinSectionRef} className="flex flex-col justify-between relative mb-12 text-center p-8 bg-gray-900 rounded-lg shadow-lg overflow-hidden h-full card">
+    <section ref={joinSectionRef} className="flex flex-col justify-between relative mb-12 text-center p-8 bg-gray-900 rounded-lg shadow-lg overflow-hidden h-full card border border-pink-500">
       {/* Cosmic horror overlay */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-900/10 to-purple-900/20"></div>
