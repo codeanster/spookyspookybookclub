@@ -32,6 +32,13 @@ function MainPage({ showModal }) {
 
   useEffect(() => {
     setIsModalOpen(showModal);
+
+    // Make API call when showModal is true (indicating the /welcome route)
+    if (showModal) {
+      axios.post('https://k67t787b4l.execute-api.us-west-1.amazonaws.com/Prod/welcome', {})
+        .then(response => console.log('API call successful:', response.data))
+        .catch(error => console.error('Error making API call:', error));
+    }
   }, [showModal]);
 
   const scrollToJoinSection = () => {
@@ -54,7 +61,7 @@ function MainPage({ showModal }) {
     e.preventDefault();
     setSubmissionStatus(null);
     try {
-      await axios.post('/Prod/subscribe', { name, email });
+      await axios.post('https://k67t787b4l.execute-api.us-west-1.amazonaws.com/Prod/subscribe', { name, email });
       setSubmissionStatus('success');
       setName('');
       setEmail('');
