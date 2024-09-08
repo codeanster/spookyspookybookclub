@@ -1,10 +1,30 @@
 import os
 import psycopg2
 import logging
+import hashlib
+import time
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
+
+def generate_session_id(user_agent):
+    """
+    Generate a unique session ID based on the user's user agent and current timestamp.
+    This helps anonymize visits while still allowing us to distinguish between different sessions.
+    """
+    unique_string = user_agent + str(time.time())  # Combine user agent with current time
+    return hashlib.sha256(unique_string.encode('utf-8')).hexdigest()  # Generate a hashed session ID
+
+def generate_visitor_hash(user_agent, ip_address):
+    """
+    Generate a consistent hash for identifying repeat visitors.
+    This uses the user-agent and the anonymized IP address to create a hash,
+    but does not store the IP address itself.
+    """
+    anonymized_ip = '.'.join(ip_address.split('.')[:3])  # Keep only the first three octets of the IP
+    unique_string = user_agent + anonymized_ip
+    return hashlib.sha256(unique_string.encode('utf-8')).hexdigest()
 
 def lambda_handler(event, context):
     # CORS headers to allow requests from any origin
@@ -46,6 +66,18 @@ def lambda_handler(event, context):
             'body': 'Method Not Allowed. Use POST.'
         }
 
+    # Retrieve the user-agent from the request headers
+    user_agent = event['headers'].get('User-Agent', 'unknown')
+
+    # Retrieve the IP address (from a proxy or directly from the request)
+    ip_address = event['headers'].get('X-Forwarded-For', 'unknown')  # Assuming you're behind a load balancer or reverse proxy
+
+    # Generate a session ID for this visit
+    session_id = generate_session_id(user_agent)
+
+    # Generate a visitor hash without storing the IP
+    visitor_hash = generate_visitor_hash(user_agent, ip_address)
+
     try:
         # Connect to the PostgreSQL database using a context manager
         with psycopg2.connect(
@@ -55,25 +87,23 @@ def lambda_handler(event, context):
             password=db_password
         ) as conn:
             with conn.cursor() as cur:
-                # SQL to update the visit count
-                update_sql = """
-                INSERT INTO visit_counts (url, visit_count)
-                VALUES ('/welcome', 1)
-                ON CONFLICT (url)
-                DO UPDATE SET visit_count = visit_counts.visit_count + 1;
+                # SQL to insert a new visit record
+                insert_sql = """
+                INSERT INTO visit_log (url, browser_type, session_id, visitor_hash)
+                VALUES (%s, %s, %s, %s);
                 """
                 # Execute the SQL command
-                cur.execute(update_sql)
+                cur.execute(insert_sql, ('/welcome', user_agent, session_id, visitor_hash))
                 conn.commit()
 
-                # Log successful update
-                logger.info('Visit count updated successfully.')
+                # Log successful insert
+                logger.info('New visit logged successfully.')
 
         # Return success response
         return {
             'statusCode': 200,
             'headers': headers,
-            'body': 'Visit count updated successfully.'
+            'body': 'New visit logged successfully.'
         }
 
     except psycopg2.OperationalError as db_conn_error:
@@ -91,7 +121,7 @@ def lambda_handler(event, context):
         return {
             'statusCode': 500,
             'headers': headers,
-            'body': 'Error updating visit count in the database.'
+            'body': 'Error logging visit in the database.'
         }
 
     except Exception as e:
