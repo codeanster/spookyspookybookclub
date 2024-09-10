@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const GlitchText = ({ text }) => {
@@ -26,13 +26,13 @@ const Modal = ({ isOpen, onClose, onConfirm }) => {
   const [showMessage, setShowMessage] = useState(false);
   const [currentMessage, setCurrentMessage] = useState(0);
 
-  const messages = [
+  const messages = useMemo(() => [
     "Welcome to the margins of reality...",
     "Here, the line between fiction and truth blurs.",
     "Are you prepared to question your perceptions?",
     "In these pages, madness and insight are two sides of the same coin.",
     "Join us. The stories are waiting... and so are we.",
-  ];
+  ], []);
 
   useEffect(() => {
     if (isOpen) {
@@ -46,7 +46,7 @@ const Modal = ({ isOpen, onClose, onConfirm }) => {
       const timer = setTimeout(() => setCurrentMessage(currentMessage + 1), 2000); // Faster message change
       return () => clearTimeout(timer);
     }
-  }, [showMessage, currentMessage]);
+  }, [showMessage, currentMessage, messages.length]);
 
   if (!isOpen) return null;
 
