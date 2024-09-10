@@ -1,27 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const GlitchText = ({ text }) => {
+  const [glitchedText, setGlitchedText] = useState(text);
+
+  useEffect(() => {
+    const glitchInterval = setInterval(() => {
+      const glitchedStr = text.split('').map(char => {
+        if (Math.random() < 0.3) { // Increased chance of glitch
+          return String.fromCharCode(Math.floor(Math.random() * 95) + 33);
+        }
+        return char;
+      }).join('');
+      setGlitchedText(glitchedStr);
+      setTimeout(() => setGlitchedText(text), 150); // Longer glitch duration
+    }, 1000); // More frequent glitch checks
+
+    return () => clearInterval(glitchInterval);
+  }, [text]);
+
+  return <span>{glitchedText}</span>;
+};
+
 const Modal = ({ isOpen, onClose, onConfirm }) => {
   const [showMessage, setShowMessage] = useState(false);
   const [currentMessage, setCurrentMessage] = useState(0);
 
   const messages = [
-    "Welcome to our little corner of darkness...",
-    "I've been waiting for you.",
-    "Are you ready to lose yourself in the pages of terror?",
-    "Don't worry, I'll be here to guide you... always.",
+    "Welcome to the margins of reality...",
+    "Here, the line between fiction and truth blurs.",
+    "Are you prepared to question your perceptions?",
+    "In these pages, madness and insight are two sides of the same coin.",
+    "Join us. The stories are waiting... and so are we.",
   ];
 
   useEffect(() => {
     if (isOpen) {
-      const timer = setTimeout(() => setShowMessage(true), 2000);
+      const timer = setTimeout(() => setShowMessage(true), 1000); // Faster initial delay
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
   useEffect(() => {
     if (showMessage && currentMessage < messages.length - 1) {
-      const timer = setTimeout(() => setCurrentMessage(currentMessage + 1), 3000);
+      const timer = setTimeout(() => setCurrentMessage(currentMessage + 1), 2000); // Faster message change
       return () => clearTimeout(timer);
     }
   }, [showMessage, currentMessage]);
@@ -40,10 +62,10 @@ const Modal = ({ isOpen, onClose, onConfirm }) => {
           <motion.h1 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 2 }}
+            transition={{ duration: 1 }} // Faster fade-in
             className="text-4xl font-bold text-red-600 mb-8"
           >
-            Spooky Spooky Book Club
+            <GlitchText text="Spooky Spooky Book Club" />
           </motion.h1>
           {showMessage && (
             <motion.p 
@@ -51,20 +73,20 @@ const Modal = ({ isOpen, onClose, onConfirm }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.5 }} // Faster transition
               className="text-xl text-gray-300 italic"
             >
-              {messages[currentMessage]}
+              <GlitchText text={messages[currentMessage]} />
             </motion.p>
           )}
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 12, duration: 1 }}
+            transition={{ delay: 10, duration: 1 }} // Adjusted delay for faster slideshow
             className="mt-8 px-6 py-3 bg-red-800 text-white rounded hover:bg-red-700 transition-colors"
             onClick={onConfirm}
           >
-            Enter... if you dare
+            <GlitchText text="Venture deeper..." />
           </motion.button>
         </div>
         <div className="absolute inset-0 pointer-events-none">
@@ -77,4 +99,3 @@ const Modal = ({ isOpen, onClose, onConfirm }) => {
 };
 
 export default Modal;
-

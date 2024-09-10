@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import MainPage from './MainPage';
 
@@ -24,8 +24,9 @@ export default function App() {
 
       <Router>
         <Routes>
-          <Route path="/" element={<MainPage showModal={false} />} />
+        <Route path="/" element={<MainPage showModal={false} />} />
           <Route path="/welcome" element={<MainPage showModal={true} />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </HelmetProvider>

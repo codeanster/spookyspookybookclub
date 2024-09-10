@@ -33,14 +33,12 @@ function MainPage({ showModal }) {
   useEffect(() => {
     setIsModalOpen(showModal);
 
-    // Make API call when showModal is true (indicating the /welcome route)
     if (showModal) {
-      // Set up the headers for the API call
       const headers = {
         'Content-Type': 'application/json',
-        'User-Agent': navigator.userAgent, // Sending user agent to the server
+        'User-Agent': navigator.userAgent,
       };
-      axios.post('https://k67t787b4l.execute-api.us-west-1.amazonaws.com/Prod/welcome', {})
+      axios.post('https://k67t787b4l.execute-api.us-west-1.amazonaws.com/Prod/welcome', {}, { headers })
         .then(response => console.log('API call successful:', response.data))
         .catch(error => console.error('Error making API call:', error));
     }
@@ -147,7 +145,7 @@ function MainPage({ showModal }) {
       </div>
 
       {/* Modal Component */}
-      <Modal isOpen={isModalOpen} onClose={handleModalClose} onConfirm={handleModalConfirm} />
+      {isModalOpen && <Modal isOpen={isModalOpen} onClose={handleModalClose} onConfirm={handleModalConfirm} />}
     </div>
   );
 }
