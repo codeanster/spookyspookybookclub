@@ -11,7 +11,6 @@ import MeetingDetails from './components/ui/MeetingDetails';
 import ReadingListPreview from './components/ui/ReadingListPreview';
 import Modal from './components/ui/Modal';
 import axios from 'axios';
-import Bookshelf from './components/ui/bookshelf';
 
 function MainPage({ showModal }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
