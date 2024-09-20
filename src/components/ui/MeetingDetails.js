@@ -16,7 +16,8 @@ const MeetingDetails = () => {
           Meeting Details
         </h2>
         <div className="text-lg mb-6 text-gray-300 leading-relaxed max-w-3xl mx-auto">
-          <p>TBA somewhere in Downtown Olympia</p>
+          <p>We meet on the 2nd Saturday of every month at 4pm at Pawsific Northwest Cat Cafe where we talk about what we're currently reading. 
+            Then afterwards we go sozialize with the kittens and pay the cat tax </p>
         </div>
       </div>
     </section>

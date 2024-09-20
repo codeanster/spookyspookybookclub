@@ -19,21 +19,22 @@ const WelcomeSection = ({ scrollToJoinSection }) => {
       </div>
 
       {/* Content */}
+
+        
       <div className={`relative z-10 transition-opacity duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>
         <h2 className="text-4xl font-bold mb-6 text-pink-500 animate-pulse">
           Enter freely and of your own will...
         </h2>
         <p className="text-lg mb-6 text-gray-300 leading-relaxed max-w-3xl mx-auto">
-          Welcome, brave souls, to the Spooky Spooky Book Club! Olympia's sanctuary for those who dare to explore the shadows.
-          Our monthly gatherings summon discussions of terror, from gothic classics to cosmic horrors unknown.
-          Join us for spine-chilling tales, haunted bookmarks, and refreshments that may or may not be cursed.
-          All are welcome in our judgment-free coven, where we peer into the abyss... and it peers back.
+        Join the Spooky Spooky Book Club in Olympia! Dive into horror literature surrounded by curious cats at Whiskers & Shadows Cafe.
+        Monthly meetings feature spine-chilling discussions, feline friends, and a welcoming community of fellow horror enthusiasts. 
+        Embrace the purr-anormal with us!
         </p>
         <Button
           onClick={scrollToJoinSection}
           className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-pink-500/50 hover:shadow-lg"
         >
-          Join Our Coven
+          Join Us
         </Button>
       </div>
 
