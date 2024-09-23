@@ -16,7 +16,17 @@ const MeetingDetails = () => {
           Meeting Details
         </h2>
         <div className="text-lg mb-6 text-gray-300 leading-relaxed max-w-3xl mx-auto">
-          <p>TBA somewhere in Downtown Olympia</p>
+
+          <p>
+            We meet on the <strong>2nd Saturday of every month at 4 PM</strong> at
+            <em> Pawsific Northwest Cat Cafe</em>, where we dive into discussions about what’s currently on our shelves
+          </p>
+          <p>
+            Afterwards, we pay the ultimate cat tax—socializing with the cafe’s adorable, adoptable kittens. 🐾
+          </p>
+          <p>
+            <strong>Come for the creepy, stay for the kittens.</strong> Who knows? You might just find the purrfect horror companion. 🕷️🐱
+          </p>
         </div>
       </div>
     </section>

@@ -24,22 +24,19 @@ const WelcomeSection = ({ scrollToJoinSection }) => {
           Enter freely and of your own will...
         </h2>
         <p className="text-lg mb-6 text-gray-300 leading-relaxed max-w-3xl mx-auto">
-          Welcome, brave souls, to the Spooky Spooky Book Club! Olympia's sanctuary for those who dare to explore the shadows.
-          Our monthly gatherings summon discussions of terror, from gothic classics to cosmic horrors unknown.
-          Join us for spine-chilling tales, haunted bookmarks, and refreshments that may or may not be cursed.
-          All are welcome in our judgment-free coven, where we peer into the abyss... and it peers back.
+          Join the <strong>Spooky Spooky Book Club</strong> in Olympia! Dive into horror literature surrounded by curious cats at <em>Pawsific Northwest Cat Cafe</em>. Monthly meetings feature spine-chilling discussions, feline friends, and a welcoming community of fellow horror enthusiasts. Embrace the purr-anormal with us!
         </p>
         <Button
           onClick={scrollToJoinSection}
           className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-pink-500/50 hover:shadow-lg"
         >
-          Join Our Coven
+          Join Us
         </Button>
       </div>
 
       {/* Floating eldritch symbols */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-        {[...Array(5)].map((_, i) => (
+        {[...Array(7)].map((_, i) => (
           <div 
             key={i}
             className="absolute text-pink-500/20 animate-float"
@@ -48,10 +45,11 @@ const WelcomeSection = ({ scrollToJoinSection }) => {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDuration: `${Math.random() * 15 + 10}s`,
-              animationDelay: `${Math.random() * 5}s`
+              animationDelay: `${Math.random() * 5}s`,
+              transform: `rotate(${Math.random() * 360}deg)`
             }}
           >
-            {['◯','◭','△','▽','◬','⬟','⬢','⯃','⯂'][Math.floor(Math.random() * 9)]}
+            {['◯', '◭', '△', '▽', '◬', '⬟', '⬢', '⯃', '⯂'][Math.floor(Math.random() * 9)]}
           </div>
         ))}
       </div>

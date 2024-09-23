@@ -4,11 +4,11 @@ import CurrentBook from './components/ui/CurrentBook';
 import BackToTop from './components/ui/BackToTop';
 import Calendar from './components/Calendar';
 import JoinUsSection from './components/ui/JoinUsSection';
-import ClubInfoSection from './components/ui/ClubInfoSection';
+// import ClubInfoSection from './components/ui/ClubInfoSection';
 import WelcomeSection from './components/ui/WelcomeSection';
 import HeaderSection from './components/ui/HeaderSection';
 import MeetingDetails from './components/ui/MeetingDetails';
-import ReadingListPreview from './components/ui/ReadingListPreview';
+// import ReadingListPreview from './components/ui/ReadingListPreview';
 import Modal from './components/ui/Modal';
 import axios from 'axios';
 
@@ -83,7 +83,21 @@ function MainPage({ showModal }) {
       {/* Skeleton Header Section */}
       <HeaderSection imgStyle={imgStyle} />
       
-      {/* Navbar Component moved below the header */}
+      <div className="flex justify-center items-center">
+        <h2 className="text-3xl font-bold text-center" 
+            style={{ 
+              color: '#B22222', 
+              textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+              background: 'linear-gradient(#B22222, #B22222) no-repeat',
+              backgroundSize: '100% 95%',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              filter: 'drop-shadow(0 0 1px #B22222)'
+            }}>
+          Olympia Horror Book Club
+        </h2>
+      </div>
+
 
       {/* Main Content with offset for fixed navbar */}
       <div className="mt-8"> {/* Adjust margin-top as needed */}
@@ -91,10 +105,10 @@ function MainPage({ showModal }) {
           <WelcomeSection scrollToJoinSection={scrollToJoinSection} />
 
           <section className="grid-container min-h-[400px] grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <ClubInfoSection />
-            <CurrentBook />
             <MeetingDetails />
-            <ReadingListPreview />
+            <CurrentBook />
+            {/* <ClubInfoSection />
+            <ReadingListPreview /> */}
           </section>
 
           <section className="mb-12 text-center">

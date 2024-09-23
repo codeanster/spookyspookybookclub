@@ -22,18 +22,7 @@ const HeaderSection = ({ imgStyle }) => {
       {/* Header Content */}
       <div className="relative z-10">
         <h1 className="text-6xl font-bold mb-4 text-pink-500">Spooky Spooky Book Club</h1>
-        <h2 className="text-3xl font-bold" 
-          style={{ 
-            color: '#B22222', 
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
-            background: 'linear-gradient(#B22222, #B22222) no-repeat',
-            backgroundSize: '100% 95%',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            filter: 'drop-shadow(0 0 1px #B22222)'
-          }}>
-          Olympia Horror Book Club
-        </h2>
+
         <GlitchText text="Get Out" />
       </div>
 
