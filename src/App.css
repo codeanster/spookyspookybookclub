@@ -352,7 +352,11 @@ button {
   transform: rotate(45deg);
 }
 
+<<<<<<< HEAD
 /* Responsive Design for Small Screens
+=======
+/* Responsive Design for Small Screens */
+>>>>>>> 9311c82 (added quiz, made landing page page better)
 @media (max-width: 600px) {
   .options-container {
     flex-direction: column;
@@ -361,4 +365,8 @@ button {
   .options-column {
     flex: 0 0 100%;
   }
+<<<<<<< HEAD
 } */
+=======
+}
+>>>>>>> 9311c82 (added quiz, made landing page page better)
