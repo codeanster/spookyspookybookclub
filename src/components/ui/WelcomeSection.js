@@ -19,16 +19,12 @@ const WelcomeSection = ({ scrollToJoinSection }) => {
       </div>
 
       {/* Content */}
-
-        
       <div className={`relative z-10 transition-opacity duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>
         <h2 className="text-4xl font-bold mb-6 text-pink-500 animate-pulse">
           Enter freely and of your own will...
         </h2>
         <p className="text-lg mb-6 text-gray-300 leading-relaxed max-w-3xl mx-auto">
-        Join the Spooky Spooky Book Club in Olympia! Dive into horror literature surrounded by curious cats at Whiskers & Shadows Cafe.
-        Monthly meetings feature spine-chilling discussions, feline friends, and a welcoming community of fellow horror enthusiasts. 
-        Embrace the purr-anormal with us!
+          Join the <strong>Spooky Spooky Book Club</strong> in Olympia! Dive into horror literature surrounded by curious cats at <em>Pawsific Northwest Cat Cafe</em>. Monthly meetings feature spine-chilling discussions, feline friends, and a welcoming community of fellow horror enthusiasts. Embrace the purr-anormal with us!
         </p>
         <Button
           onClick={scrollToJoinSection}
@@ -40,7 +36,7 @@ const WelcomeSection = ({ scrollToJoinSection }) => {
 
       {/* Floating eldritch symbols */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-        {[...Array(5)].map((_, i) => (
+        {[...Array(7)].map((_, i) => (
           <div 
             key={i}
             className="absolute text-pink-500/20 animate-float"
@@ -49,10 +45,11 @@ const WelcomeSection = ({ scrollToJoinSection }) => {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDuration: `${Math.random() * 15 + 10}s`,
-              animationDelay: `${Math.random() * 5}s`
+              animationDelay: `${Math.random() * 5}s`,
+              transform: `rotate(${Math.random() * 360}deg)`
             }}
           >
-            {['◯','◭','△','▽','◬','⬟','⬢','⯃','⯂'][Math.floor(Math.random() * 9)]}
+            {['◯', '◭', '△', '▽', '◬', '⬟', '⬢', '⯃', '⯂'][Math.floor(Math.random() * 9)]}
           </div>
         ))}
       </div>

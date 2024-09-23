@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className="space-x-4">
           <Link to="/" className="hover:text-pink-500">Home</Link>
           {/* <Link to="/welcome" className="hover:text-pink-500">Welcome</Link> */}
-          <Link to="/bookshelf" className="hover:text-pink-500">Bookshelf</Link> {/* Add Bookshelf link */}
+          {/* <Link to="/bookshelf" className="hover:text-pink-500">Bookshelf</Link> Add Bookshelf link */}
         </div>
       </div>
     </nav>

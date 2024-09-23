@@ -4,6 +4,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import MainPage from './MainPage';
 import Navbar from './components/ui/Navbar'; // Import Navbar
 import Bookshelf from './components/ui/bookshelf'; // Import Bookshelf
+import QuizContainer from './components/ui/QuizContainer'; // Import Bookshelf
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/" element={<MainPage showModal={false} />} />
           <Route path="/welcome" element={<MainPage showModal={true} />} />
           <Route path="/bookshelf" element={<Bookshelf />} />
+          <Route path="/quiz" element={<QuizContainer />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
