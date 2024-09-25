@@ -10,8 +10,8 @@ import { Card, CardHeader, CardTitle, CardContent } from './card'; // Adjust the
 const QuizContainer = () => {
   // State variables
   const [showConsentModal, setShowConsentModal] = useState(true);
-  const [setConsentGiven] = useState(false);
-  // const [consentGiven, setConsentGiven] = useState(false);
+  // const [setConsentGiven] = useState(false);
+  const [consentGiven, setConsentGiven] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quizResponses, setQuizResponses] = useState({
     subGenres: [],
@@ -33,7 +33,7 @@ const QuizContainer = () => {
   const [recommendations, setRecommendations] = useState(null); // Changed to null
 
   // Replace with actual user ID logic
-  // const userId = 'user123';
+  const userId = 'user123';
 
   // Handle user consent
   const handleConsent = (consent) => {
@@ -103,14 +103,15 @@ const QuizContainer = () => {
       setRecommendations(recommendationsData.recommendations);
 
       // Optionally save the quiz data if consent is given
-      // if (consentGiven) {
-      //   const quizData = {
-      //     user_id: userId,
-      //     consent_given: consentGiven,
-      //     responses: quizResponses,
-      //   };
-      //   await saveQuizResponse(quizData);
-      // }
+      if (consentGiven) {
+        const quizData = {
+          user_id: userId,
+          consent_given: consentGiven,
+          responses: quizResponses,
+        };
+        console.log(quizData);
+        // await saveQuizResponse(quizData);
+      }
     } catch (error) {
       console.error('Error:', error);
       alert('An error occurred while processing your request. Please try again.');
