@@ -29,7 +29,7 @@ export default function CurrentBook() {
   if (!book) return <p className="text-white">No book data available.</p>;
 
   return (
-    <Card className="flex flex-col justify-between relative mb-12 text-center p-8 bg-gray-900 rounded-lg shadow-lg overflow-hidden h-full card border border-pink-500">
+    <Card className="flex flex-col justify-between relative mb-12 text-center p-8 bg-gray-900 rounded-lg shadow-lg overflow-hidden h-full border border-pink-500 transform transition-transform hover:scale-105 hover:shadow-2xl">
       {/* Cosmic horror overlay */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-900/10 to-purple-900/20"></div>
@@ -40,23 +40,43 @@ export default function CurrentBook() {
       {/* Content */}
       <div className="relative z-10 flex-grow">
         <CardHeader>
-          <CardTitle className="text-pink-500">{book.title}</CardTitle>
+          <CardTitle className="text-pink-500 text-2xl">{book.title}</CardTitle>
         </CardHeader>
         <CardContent>
           {book.cover_image_url ? (
             <img
               src={book.cover_image_url}
               alt={book.title}
-              className="w-full h-48 object-cover mb-4 rounded-lg"
+              className="w-full h-53 object-cover mb-4 rounded-lg border-4 border-pink-600 shadow-lg hover:shadow-pink-500/50 transition-shadow duration-300 hover:scale-105 transform"
             />
           ) : (
             <div className="w-full h-48 bg-gray-600 text-white flex items-center justify-center mb-4 rounded-lg">
               No Image Available
             </div>
           )}
-          <p className="text-white">
+          <p className="text-white mb-2">
             <strong>Author:</strong> {book.author_name}
           </p>
+          {book.genre && (
+            <p className="text-gray-300 text-sm mb-2">
+              <strong>Genre:</strong> {book.genre_name}
+            </p>
+          )}
+          {book.description && (
+            <p className="text-gray-300 text-sm mb-2">
+              <strong>Description:</strong> {book.description}
+            </p>
+          )}
+          {book.publication_date && (
+            <p className="text-gray-400 text-xs italic">
+              Published: {new Date(book.publication_date).toLocaleDateString()}
+            </p>
+          )}
+          <div className="mt-4 flex justify-center">
+            <button className="px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition-colors">
+              Add to Reading List
+            </button>
+          </div>
         </CardContent>
       </div>
     </Card>

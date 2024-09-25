@@ -4,19 +4,19 @@ import React, { useState } from 'react';
 import Question from './Question';
 import ConsentModal from './ConsentModal';
 import ProgressBar from './ProgressBar';
-import { saveQuizResponse } from './apiService';
+// import { saveQuizResponse } from './apiService'; // Uncomment if you have an API service
 import { Card, CardHeader, CardTitle, CardContent } from './card'; // Adjust the import path as needed
 
 const QuizContainer = () => {
   // State variables
   const [showConsentModal, setShowConsentModal] = useState(true);
-  const [consentGiven, setConsentGiven] = useState(false);
+  const [setConsentGiven] = useState(false);
+  // const [consentGiven, setConsentGiven] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quizResponses, setQuizResponses] = useState({
     subGenres: [],
     pacing: '',
     endingStyle: '',
-    // Initialize new response fields
     preferredTropes: [],
     preferredThemes: [],
     protagonistTypes: [],
@@ -30,9 +30,94 @@ const QuizContainer = () => {
     contentWarnings: [],
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recommendations, setRecommendations] = useState(null); // Changed to null
 
   // Replace with actual user ID logic
-  const userId = 'user123';
+  // const userId = 'user123';
+
+  // Handle user consent
+  const handleConsent = (consent) => {
+    setConsentGiven(consent);
+    setShowConsentModal(false);
+  };
+
+  // Handle answer selection
+  const handleAnswerSelection = (questionId, answers) => {
+    setQuizResponses((prevResponses) => ({
+      ...prevResponses,
+      [questionId]: answers,
+    }));
+  };
+
+  // Navigate to the next question or submit
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    } else {
+      handleSubmit();
+    }
+  };
+
+  // Navigate to the previous question
+  const handlePreviousQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
+    }
+  };
+
+  // Submit quiz responses
+  const handleSubmit = async () => {
+    // Front-end validation
+    const unansweredQuestions = questions.filter(
+      (q) => !quizResponses[q.id] || quizResponses[q.id].length === 0
+    );
+
+    if (unansweredQuestions.length > 0) {
+      alert('Please answer all questions before submitting.');
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      // 'http://127.0.0.1:3000/quiz'
+      // Send the quizResponses to the backend
+      // const response = await fetch('https://your-api-endpoint.com/quiz', {
+      const response = await fetch('https://k67t787b4l.execute-api.us-west-1.amazonaws.com/Prod/quiz', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ quizResponses }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+
+      // Parse the recommendations
+      const recommendationsData = JSON.parse(data.recommendations);
+
+      // Set the recommendations state
+      setRecommendations(recommendationsData.recommendations);
+
+      // Optionally save the quiz data if consent is given
+      // if (consentGiven) {
+      //   const quizData = {
+      //     user_id: userId,
+      //     consent_given: consentGiven,
+      //     responses: quizResponses,
+      //   };
+      //   await saveQuizResponse(quizData);
+      // }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while processing your request. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Quiz questions
   const questions = [
@@ -250,93 +335,6 @@ const QuizContainer = () => {
     },
   ];
 
-  // Handle user consent
-  const handleConsent = (consent) => {
-    setConsentGiven(consent);
-    setShowConsentModal(false);
-  };
-
-  // Handle answer selection
-  const handleAnswerSelection = (questionId, answers) => {
-    setQuizResponses((prevResponses) => ({
-      ...prevResponses,
-      [questionId]: answers,
-    }));
-  };
-
-  // Navigate to the next question or submit
-  const handleNextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    } else {
-      handleSubmit();
-    }
-  };
-
-  // Navigate to the previous question
-  const handlePreviousQuestion = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
-    }
-  };
-
-  // Submit quiz responses
-  const handleSubmit = async () => {
-    // Front-end validation
-    const unansweredQuestions = questions.filter(
-      (q) => !quizResponses[q.id] || quizResponses[q.id].length === 0
-    );
-
-    if (unansweredQuestions.length > 0) {
-      alert('Please answer all questions before submitting.');
-      return;
-    }
-
-    const quizData = {
-      user_id: userId,
-      consent_given: consentGiven,
-      responses: quizResponses,
-    };
-
-    if (consentGiven) {
-      try {
-        setIsSubmitting(true);
-        const result = await saveQuizResponse(quizData);
-        console.log(result.message);
-        // Show a success message or redirect the user
-        alert('Thank you for completing the quiz!');
-        // Reset the quiz or navigate to another page
-        setQuizResponses({
-          subGenres: [],
-          pacing: '',
-          endingStyle: '',
-          preferredTropes: [],
-          preferredThemes: [],
-          protagonistTypes: [],
-          antagonistTypes: [],
-          preferredSettings: [],
-          atmosphere: [],
-          emotionalImpact: [],
-          narrativeStyles: [],
-          plotComplexity: '',
-          culturalInterests: [],
-          contentWarnings: [],
-        });
-        setCurrentQuestionIndex(0);
-      } catch (error) {
-        console.error('Error saving quiz response:', error);
-        alert('An error occurred while saving your responses. Please try again.');
-      } finally {
-        setIsSubmitting(false);
-      }
-    } else {
-      // Handle the case where consent was not given
-      console.log('User did not give consent. Quiz data will not be saved.');
-      alert('Your preferences have been noted locally.');
-      // Proceed accordingly
-    }
-  };
-
   // Render consent modal if needed
   if (showConsentModal) {
     return <ConsentModal onConsent={handleConsent} />;
@@ -374,29 +372,73 @@ const QuizContainer = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <ProgressBar percentage={progressPercentage} />
-          <Question
-            question={currentQuestion}
-            onAnswer={handleAnswerSelection}
-            selectedAnswers={quizResponses[currentQuestion.id]}
-          />
-          <div className="navigation-buttons flex justify-between mt-6">
-            {currentQuestionIndex > 0 && (
+          {/* If recommendations are available, display them */}
+          {recommendations ? (
+            <div className="recommendations text-white">
+              <h2 className="text-2xl font-bold mb-4">Your Personalized Recommendations:</h2>
+              <ul>
+                {recommendations.map((book, index) => (
+                  <li key={index} className="mb-6">
+                    <h3 className="text-xl font-semibold">{book.title}</h3>
+                    <p className="italic">by {book.author}</p>
+                    <p>{book.description}</p>
+                  </li>
+                ))}
+              </ul>
               <button
-                className="prev-button bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded"
-                onClick={handlePreviousQuestion}
+                className="mt-6 bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded"
+                onClick={() => {
+                  // Reset the quiz to allow the user to retake it
+                  setQuizResponses({
+                    subGenres: [],
+                    pacing: '',
+                    endingStyle: '',
+                    preferredTropes: [],
+                    preferredThemes: [],
+                    protagonistTypes: [],
+                    antagonistTypes: [],
+                    preferredSettings: [],
+                    atmosphere: [],
+                    emotionalImpact: [],
+                    narrativeStyles: [],
+                    plotComplexity: '',
+                    culturalInterests: [],
+                    contentWarnings: [],
+                  });
+                  setCurrentQuestionIndex(0);
+                  setRecommendations(null);
+                }}
               >
-                Previous
+                Retake Quiz
               </button>
-            )}
-            <button
-              className="next-button bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded"
-              onClick={handleNextQuestion}
-              disabled={isSubmitting}
-            >
-              {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Submit'}
-            </button>
-          </div>
+            </div>
+          ) : (
+            <>
+              <ProgressBar percentage={progressPercentage} />
+              <Question
+                question={currentQuestion}
+                onAnswer={handleAnswerSelection}
+                selectedAnswers={quizResponses[currentQuestion.id]}
+              />
+              <div className="navigation-buttons flex justify-between mt-6">
+                {currentQuestionIndex > 0 && (
+                  <button
+                    className="prev-button bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded"
+                    onClick={handlePreviousQuestion}
+                  >
+                    Previous
+                  </button>
+                )}
+                <button
+                  className="next-button bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded"
+                  onClick={handleNextQuestion}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Submitting...' : currentQuestionIndex < questions.length - 1 ? 'Next' : 'Submit'}
+                </button>
+              </div>
+            </>
+          )}
         </CardContent>
       </Card>
     </div>
