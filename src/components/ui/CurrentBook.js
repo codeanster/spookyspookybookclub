@@ -72,11 +72,11 @@ export default function CurrentBook() {
               Published: {new Date(book.publication_date).toLocaleDateString()}
             </p>
           )}
-          <div className="mt-4 flex justify-center">
+          {/* <div className="mt-4 flex justify-center">
             <button className="px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition-colors">
               Add to Reading List
             </button>
-          </div>
+          </div> */}
         </CardContent>
       </div>
     </Card>

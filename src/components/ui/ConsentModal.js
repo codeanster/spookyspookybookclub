@@ -20,14 +20,14 @@ const ConsentModal = ({ onConsent }) => {
       <Card className="relative z-10 max-w-md w-full">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-pink-500 mb-2">
-            Enter the Shadows?
+            Take the Quiz?
           </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-gray-300 mb-6">
-            Do you dare let us peek into your darkest reading desires? By
-            proceeding, you grant us permission to use your responses to enhance
-            our eerie offerings.
+            Answer some questions about what kind of tropes you like reading about, and our AI will pick some books for you. 
+            You can accept or decline whether you would like these results saved.
+            You can access your results either way
           </p>
           <div className="flex justify-around">
             <button

@@ -348,7 +348,7 @@ const QuizContainer = () => {
     <div className="cosmic-horror-background relative min-h-screen flex items-center justify-center p-4">
       {/* Floating eldritch symbols */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-20">
-        {[...Array(10)].map((_, i) => (
+        {[...Array(100)].map((_, i) => (
           <div
             key={i}
             className="absolute text-pink-500/20 animate-float"
