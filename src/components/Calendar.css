@@ -136,3 +136,52 @@
     background-color: #ffffff;
     color: #ff0077;
 }
+
+.add-to-calendar {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.calendar-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.9rem;
+}
+
+.google-calendar {
+    background-color: #4285F4; /* Google Blue */
+}
+
+.google-calendar:hover {
+    background-color: #357ae8;
+}
+
+.ical-calendar {
+    background-color: #ff0077; /* Your theme color */
+}
+
+.ical-calendar:hover {
+    background-color: #e6006e;
+}
+
+.close-modal-button {
+    background-color: #ff0077;
+    border: none;
+    padding: 8px 16px;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 20px;
+}
+
+.close-modal-button:hover {
+    background-color: #ffffff;
+    color: #ff0077;
+}
