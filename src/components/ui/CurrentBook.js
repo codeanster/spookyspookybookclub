@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card, CardContent, CardHeader, CardTitle } from './card'; // Adjust the import path as needed
-import SpoilerText from './SpoilerText'; // Import the SpoilerText component
+import { Card, CardContent, CardHeader, CardTitle } from './card';
+import SpoilerText from './SpoilerText';
 
 export default function CurrentBook() {
   const [book, setBook] = useState(null);
@@ -37,7 +37,7 @@ export default function CurrentBook() {
   if (!book) return <p className="text-white">No book data available.</p>;
 
   return (
-    <>
+    <div className="pt-16"> {/* Added padding-top to account for navbar */}
       <Card className="flex flex-col justify-between relative mb-12 text-center p-8 bg-gray-900 rounded-lg shadow-lg overflow-hidden h-full border border-pink-500 transform transition-transform hover:scale-105 hover:shadow-2xl">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-900/10 to-purple-900/20"></div>
@@ -65,25 +65,18 @@ export default function CurrentBook() {
               <strong>Author{Array.isArray(book.Authors) && book.Authors.length > 1 ? 's' : ''}:</strong>{' '}
               {Array.isArray(book.Authors) ? book.Authors.join(', ') : book.Authors}
             </p>
-            {book.Category && book.Category !== 'null' && (
-              <p className="text-gray-300 text-sm mb-2">
-                <strong>Category:</strong> {book.Category}
-              </p>
-            )}
-            <div className="mt-4 flex justify-center">
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition-colors"
-              >
-                More Information
-              </button>
-            </div>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="mt-4 bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition-colors duration-300"
+            >
+              More Details
+            </button>
           </CardContent>
         </div>
       </Card>
 
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 pt-16">
           {/* Modal Overlay */}
           <div
             className="absolute inset-0 bg-black bg-opacity-70"
@@ -91,7 +84,7 @@ export default function CurrentBook() {
           ></div>
 
           {/* Modal Content */}
-          <Card className="relative z-10 max-w-lg w-full">
+          <Card className="relative z-10 max-w-lg w-full max-h-[calc(100vh-5rem)] overflow-y-auto">
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-pink-500 mb-2">{book.Title}</CardTitle>
             </CardHeader>
@@ -115,7 +108,8 @@ export default function CurrentBook() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-pink-500 hover:underline"
-                    >
+    
+                >
                       Amazon
                     </a>
                   </li>
@@ -146,7 +140,7 @@ export default function CurrentBook() {
                 </ul>
               </div>
               <button
-                className="absolute top-2 right-2 text-gray-400 hover:text-gray-200 text-2xl"
+                className="fixed top-2 right-2 text-gray-400 hover:text-gray-200 text-2xl bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
                 onClick={() => setIsModalOpen(false)}
               >
                 &times;
@@ -155,6 +149,6 @@ export default function CurrentBook() {
           </Card>
         </div>
       )}
-    </>
+    </div>
   );
 }
