@@ -14,7 +14,7 @@ export default function App() {
         <meta name="description" content="Join Olympia's Spooky Spooky Book Club for chilling discussions on horror literature. Monthly meetings, diverse readings, and a welcoming community await. Dare to delve deeper?" />
         <meta name="keywords" content="horror book club, Olympia book club, spooky book discussions, horror literature, join book club Olympia" />
         <link rel="canonical" href="https://www.spookyspookybookclub.com" />
-        <script type="module">
+        {/* <script type="module">
           {`
             import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
             Chatbot.init({
@@ -22,7 +22,7 @@ export default function App() {
               apiHost: "https://flowiseai-railway-production-36ff.up.railway.app",
             });
           `}
-        </script>
+        </script> */}
       </Helmet>
 
       <Router>
