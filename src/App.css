@@ -352,7 +352,7 @@ button {
   transform: rotate(45deg);
 }
 
-/* Responsive Design for Small Screens */
+/* Responsive Design for Small Screens
 @media (max-width: 600px) {
   .options-container {
     flex-direction: column;
@@ -361,4 +361,4 @@ button {
   .options-column {
     flex: 0 0 100%;
   }
-}
+} */

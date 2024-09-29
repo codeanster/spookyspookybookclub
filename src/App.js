@@ -10,7 +10,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Spooky Spooky Book Club | Olympia's Premier Horror Literature Circle</title>
+        <title>Spooky Spooky Book Club </title>
         <meta name="description" content="Join Olympia's Spooky Spooky Book Club for chilling discussions on horror literature. Monthly meetings, diverse readings, and a welcoming community await. Dare to delve deeper?" />
         <meta name="keywords" content="horror book club, Olympia book club, spooky book discussions, horror literature, join book club Olympia" />
         <link rel="canonical" href="https://www.spookyspookybookclub.com" />
