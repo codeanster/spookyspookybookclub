@@ -25,7 +25,7 @@ const Navbar = () => {
         <Link to="/" className="text-xl font-bold hover:text-pink-500 transition-colors duration-300">
           {glitchText}
         </Link>
-        {/* Rest of your navbar code */}
+
       </div>
     </nav>
   );

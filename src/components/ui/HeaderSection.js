@@ -43,6 +43,7 @@ const HeaderSection = ({ imgStyle }) => {
         </h1>
 
         <GlitchText text="Get Out" intensity={glitchIntensity} />
+
       </div>
 
       {/* Navbar Positioned Below Header Content */}

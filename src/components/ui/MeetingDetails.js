@@ -32,6 +32,7 @@ const MeetingDetails = () => {
             </p>
           </div>
         </CardContent>
+
       </div>
     </Card>
   );

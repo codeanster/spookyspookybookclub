@@ -12,6 +12,9 @@ import JoinUsSection from './components/ui/JoinUsSection';
 import WelcomeSection from './components/ui/WelcomeSection';
 import HeaderSection from './components/ui/HeaderSection';
 import MeetingDetails from './components/ui/MeetingDetails';
+
+
+
 import Modal from './components/ui/Modal';
 import QuizAdvertisement from './components/ui/QuizAdvertisement';
 import CountdownTimer from './components/ui/CountdownTimer';
@@ -139,22 +142,24 @@ function MainPage({ showModal }) {
       {/* Header Section */}
       <HeaderSection imgStyle={imgStyle} />
 
+      
       <div className="flex justify-center items-center">
-        <h2
-          className="text-3xl font-bold text-center"
-          style={{
-            color: '#B22222',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
-            background: 'linear-gradient(#B22222, #B22222) no-repeat',
-            backgroundSize: '100% 95%',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            filter: 'drop-shadow(0 0 1px #B22222)',
-          }}
-        >
+        <h2 className="text-3xl font-bold text-center" 
+            style={{ 
+              color: '#B22222', 
+              textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+              background: 'linear-gradient(#B22222, #B22222) no-repeat',
+              backgroundSize: '100% 95%',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              filter: 'drop-shadow(0 0 1px #B22222)'
+            }}>
           Olympia Horror Book Club
         </h2>
       </div>
+
+
+
 
       {/* Main Content */}
       <div className="mt-8">
@@ -165,10 +170,12 @@ function MainPage({ showModal }) {
           {/* Quiz Advertisement */}
           <QuizAdvertisement />
 
-          <section className="grid-container min-h-[400px] grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <MeetingDetails />
-          <CurrentBook />
-        </section>
+            <section className="grid-container min-h-[400px] grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <MeetingDetails />
+            <CurrentBook />
+          </section>
+
+
 
           {/* Countdown Timer Section */}
           {nextEventDate && (

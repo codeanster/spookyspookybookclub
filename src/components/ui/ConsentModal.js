@@ -21,6 +21,7 @@ const ConsentModal = ({ onConsent }) => {
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-pink-500 mb-2">
             Take the Quiz?
+
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -28,6 +29,7 @@ const ConsentModal = ({ onConsent }) => {
             Answer some questions about what kind of tropes you like reading about, and our AI will pick some books for you. 
             You can accept or decline whether you would like these results saved.
             You can access your results either way
+
           </p>
           <div className="flex justify-around">
             <button

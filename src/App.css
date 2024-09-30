@@ -4,7 +4,7 @@
 
 /* Your custom styles */
 .App {
-  text-align: center;
+  @apply text-center;
 }
 
 .App-logo {
@@ -19,18 +19,12 @@
 }
 
 .App-header {
-  background-color: #59ad0b;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @apply bg-[#59ad0b] min-h-screen flex flex-col items-center justify-center text-white;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
-  color: #61dafb;
+  @apply text-[#61dafb];
 }
 
 @keyframes App-logo-spin {
@@ -59,9 +53,8 @@
 
 /* Cosmic horror background */
 .cosmic-horror-background {
+  @apply relative overflow-hidden;
   background-color: #1b1d24;
-  position: relative;
-  overflow: hidden;
 }
 
 .animate-subtle-stars {
@@ -89,209 +82,124 @@
 
 /* Content section styles */
 .content-section {
-  background-color: rgba(30, 33, 43, 0.8); /* Dark, slightly transparent background */
-  backdrop-filter: blur(5px); /* Blur effect for depth */
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
+  @apply bg-opacity-80 bg-[#1e212b] backdrop-blur-md rounded-lg shadow-lg p-5 mb-5;
 }
 
 /* Grid layout */
 .grid-container {
-  display: grid;
+  @apply grid gap-8 min-h-[400px];
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  min-height: 400px; /* Adjust if needed */
-  height: auto; /* Change from 100% to auto */
 }
 
-/* Ensures all direct children of the grid take up full height */
 .grid > div {
-  display: flex;
-  flex-direction: column;
-  /* Removed height: 100%; */
+  @apply flex flex-col;
 }
 
 /* Body styles */
 body {
-  background-color: #1b1d24; /* Change this to your desired background color */
-  color: white; /* Ensures text remains readable */
+  background-color: #1b1d24;
+  @apply text-white;
 }
 
-/* Background gradient */
+/* Gradient background */
 .bg-gradient-to-b {
-  background-color: #1b1d24 !important; /* Dark background color */
+  background-color: #1b1d24 !important;
 }
 
 /* Ensure all cards are the same size */
 .card {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  padding: 1rem;
-  background-color: #1e2029;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  border: 2px solid rgb(12, 11, 12);
+  @apply flex flex-col justify-between w-full p-4 bg-[#1e2029] rounded-lg shadow-lg border-2 border-[#0c0b0c];
 }
-
 
 /* General Styles */
 body {
-  font-family: 'Lora', serif;
-  background-color: #1b1b1b;
-  color: #e0e0e0;
-  margin: 0;
-  padding: 0;
+  @apply font-serif bg-[#1b1b1b] text-[#e0e0e0] m-0 p-0;
 }
 
-h1,
-h2 {
-  color: #f5f5f5;
+h1, h2 {
+  @apply text-[#f5f5f5];
 }
 
 button {
-  font-family: 'Lora', serif;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
+  @apply font-serif p-2 border-0 cursor-pointer;
 }
 
 /* Quiz Container */
 .quiz-container {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #2b2b2b;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  @apply max-w-xl mx-auto my-12 p-5 bg-[#2b2b2b] rounded-lg shadow-lg;
 }
 
 .quiz-container h1 {
-  text-align: center;
-  margin-bottom: 30px;
+  @apply text-center mb-8;
 }
 
 /* Progress Bar */
 .progress-bar {
-  width: 100%;
-  background-color: #3b3b3b;
-  border-radius: 5px;
-  overflow: hidden;
-  margin-bottom: 20px;
+  @apply w-full bg-[#3b3b3b] rounded-lg overflow-hidden mb-5;
 }
 
 .progress-bar-fill {
-  height: 10px;
-  background-color: #d32f2f;
-  transition: width 0.3s ease;
+  @apply h-2 bg-[#d32f2f] transition-all;
 }
 
 /* Question */
 .question {
-  margin-bottom: 30px;
+  @apply mb-8;
 }
 
 .question h2 {
-  margin-bottom: 20px;
+  @apply mb-5;
 }
 
 .options {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col;
 }
 
 .option-label {
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 15px;
-  cursor: pointer;
-  user-select: none;
-  font-size: 18px;
+  @apply relative pl-9 mb-5 cursor-pointer select-none text-lg;
 }
 
 .option-label input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
+  @apply absolute opacity-0 cursor-pointer;
 }
 
 .custom-checkbox {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #3b3b3b;
-  border: 1px solid #757575;
-  border-radius: 3px;
+  @apply absolute left-0 top-0 h-6 w-6 bg-[#3b3b3b] border border-gray-400 rounded-sm;
 }
 
 .option-label input:checked ~ .custom-checkbox {
-  background-color: #d32f2f;
+  @apply bg-[#d32f2f];
 }
 
 .option-label .custom-checkbox::after {
   content: '';
-  position: absolute;
-  display: none;
+  @apply absolute hidden left-2 top-1 w-1.5 h-2.5 border-white border-2 transform rotate-45;
 }
 
 .option-label input:checked ~ .custom-checkbox::after {
-  display: block;
-}
-
-.option-label .custom-checkbox::after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  @apply block;
 }
 
 /* Navigation Buttons */
 .navigation-buttons {
-  display: flex;
-  justify-content: space-between;
+  @apply flex justify-between;
 }
 
-.prev-button,
-.next-button {
-  background-color: #d32f2f;
-  color: #fff;
-  border-radius: 5px;
+.prev-button, .next-button {
+  @apply bg-[#d32f2f] text-white rounded-lg;
 }
 
-.prev-button:hover,
-.next-button:hover {
-  background-color: #b71c1c;
+.prev-button:hover, .next-button:hover {
+  @apply bg-[#b71c1c];
 }
 
-/* Options Container */
-.options-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-/* Options Column */
-.options-column {
-  flex: 0 0 48%; /* Adjust as needed to fit your layout */
-}
-
-/* Responsive Design for Small Screens */
+/* Responsive Design */
 @media (max-width: 600px) {
   .options-container {
-    flex-direction: column;
+    @apply flex-col;
   }
 
   .options-column {
-    flex: 0 0 100%;
+    @apply w-full;
   }
 }

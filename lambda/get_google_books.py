@@ -212,6 +212,17 @@ def fetch_or_insert_book(parsed_google_book):
         return {
             'Author Name': 'Unknown',
             'Genre': 'Uncategorized'
+    for book in book_items:
+        grabbed_book = book.get('volumeInfo', {})
+        
+        # Creates a dictionary with desired attributes, using 'get' with default values
+        parsed_book = {
+            'Title': grabbed_book.get('title', 'null'),
+            'Authors': grabbed_book.get('authors', 'null'),
+            'Published Date': grabbed_book.get('publishedDate', 'null'),
+            'Description': grabbed_book.get('description', 'null'),
+            'Category': grabbed_book.get('categories', 'null'),
+            'Cover Url': grabbed_book.get('cover_url',)
         }
     finally:
         if 'cur' in locals():

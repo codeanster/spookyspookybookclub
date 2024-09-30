@@ -44,7 +44,9 @@ def lambda_handler(event, context):
             # Execute the query to find the book by title
             cur.execute("""
                 SELECT 
+
                     book_id, title, a.author_id, isbn, publication_date, b.description, cover_image_url , a.name as author_name, g.genre_name
+
                 FROM books b
                 JOIN authors a on a.author_id = b.author_id
                 JOIN genres g on b.genre_id = g.genre_id  
