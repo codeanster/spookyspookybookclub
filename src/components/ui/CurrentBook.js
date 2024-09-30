@@ -37,8 +37,8 @@ export default function CurrentBook() {
   if (!book) return <p className="text-white">No book data available.</p>;
 
   return (
-    <div className="pt-16"> {/* Added padding-top to account for navbar */}
-      <Card className="flex flex-col justify-between relative mb-12 text-center p-8 bg-gray-900 rounded-lg shadow-lg overflow-hidden h-full border border-pink-500 transform transition-transform hover:scale-105 hover:shadow-2xl">
+    <div>
+      <Card className="flex flex-col justify-between relative mb-12 text-center p-8 bg-gray-900 rounded-lg shadow-lg overflow-hidden border border-pink-500 transform transition-all duration-300 hover:scale-105 min-h-[400px]">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-900/10 to-purple-900/20"></div>
           <div className="absolute inset-0 animate-subtle-stars"></div>
@@ -54,7 +54,7 @@ export default function CurrentBook() {
               <img
                 src={book['Cover Url']}
                 alt={book.Title}
-                className="w-full h-53 object-cover mb-4 rounded-lg border-4 border-pink-600 shadow-lg hover:shadow-pink-500/50 transition-shadow duration-300 hover:scale-105 transform"
+                className="w-full h-auto max-h-96 object-cover mb-4 rounded-lg border-4 border-pink-600 shadow-lg hover:shadow-pink-500/50 transition-shadow duration-300 hover:scale-105 transform"
               />
             ) : (
               <div className="w-full h-48 bg-gray-600 text-white flex items-center justify-center mb-4 rounded-lg">
@@ -94,10 +94,14 @@ export default function CurrentBook() {
                 {Array.isArray(book.Authors) ? book.Authors.join(', ') : book.Authors}
               </p>
               <p className="text-gray-300 mb-4">
-                <strong>Synopsis:</strong> {book.Description !== 'null' ? book.Description : 'No description available.'}
+                <strong>Synopsis:</strong>{' '}
+                {book.Description !== 'null' ? book.Description : 'No description available.'}
               </p>
               <p className="text-gray-400 text-xs italic mb-4">
-                Published: {book['Published Date'] !== 'null' ? new Date(book['Published Date']).toLocaleDateString() : 'N/A'}
+                Published:{' '}
+                {book['Published Date'] !== 'null'
+                  ? new Date(book['Published Date']).toLocaleDateString()
+                  : 'N/A'}
               </p>
               <div className="mb-4">
                 <h3 className="text-pink-500 mb-2">Purchase Links:</h3>
@@ -108,8 +112,7 @@ export default function CurrentBook() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-pink-500 hover:underline"
-    
-                >
+                    >
                       Amazon
                     </a>
                   </li>

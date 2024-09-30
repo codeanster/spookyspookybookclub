@@ -165,11 +165,10 @@ function MainPage({ showModal }) {
           {/* Quiz Advertisement */}
           <QuizAdvertisement />
 
-          {/* Meeting Details and Current Book */}
           <section className="grid-container min-h-[400px] grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <MeetingDetails />
-            <CurrentBook />
-          </section>
+          <MeetingDetails />
+          <CurrentBook />
+        </section>
 
           {/* Countdown Timer Section */}
           {nextEventDate && (

@@ -25,12 +25,22 @@ const HeaderSection = ({ imgStyle }) => {
       />
       
       {/* Header Content */}
-      <div 
-        className="relative z-10"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <h1 className="text-6xl font-bold mb-4 text-pink-500">Spooky Spooky Book Club</h1>
+      <div className="relative z-10">
+        <h1 
+          className="text-6xl font-bold mb-4" 
+          style={{ 
+            fontFamily: "'Creepster', cursive", 
+            color: '#ff007f', 
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', /* Adds shadow */
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', /* Optional: adds dark transparent background */
+            padding: '10px', 
+            borderRadius: '5px' 
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          Spooky Spooky Book Club
+        </h1>
 
         <GlitchText text="Get Out" intensity={glitchIntensity} />
       </div>

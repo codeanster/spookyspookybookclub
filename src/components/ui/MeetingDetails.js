@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './card'; // Adjust the
 
 const MeetingDetails = () => {
   return (
-    <Card className="flex flex-col justify-between relative mb-12 text-center p-8 bg-gray-900 rounded-lg shadow-lg overflow-hidden h-full border border-pink-500">
+    <Card className="flex flex-col justify-between relative mb-12 text-center p-8 bg-gray-900 rounded-lg shadow-lg overflow-hidden border border-pink-500 min-h-[400px]">
       {/* Cosmic horror overlay */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-900/10 to-purple-900/20"></div>

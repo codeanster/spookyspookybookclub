@@ -337,7 +337,8 @@ const QuizContainer = () => {
   ];
 
   // Render consent modal if needed
-  if (showConsentModal) {
+   // Render consent modal if needed
+   if (showConsentModal) {
     return <ConsentModal onConsent={handleConsent} />;
   }
 
@@ -345,7 +346,7 @@ const QuizContainer = () => {
   const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
-    <div className="cosmic-horror-background relative min-h-screen flex items-center justify-center p-4">
+    <div className="cosmic-horror-background relative min-h-screen flex items-center justify-center p-4 pt-16"> {/* Added pt-16 here */}
       {/* Floating eldritch symbols */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-20">
         {[...Array(100)].map((_, i) => (
@@ -366,7 +367,7 @@ const QuizContainer = () => {
         ))}
       </div>
 
-      <Card className="bg-gradient-to-b from-gray-800 to-gray-900 p-8 rounded-lg shadow-lg z-10 relative max-w-3xl w-full">
+      <Card className="bg-gradient-to-b from-gray-800 to-gray-900 p-8 rounded-lg shadow-lg z-10 relative max-w-3xl w-full mt-16"> {/* Added mt-16 here */}
         <CardHeader>
           <CardTitle className="text-4xl font-bold text-center text-pink-500 mb-6 drop-shadow-lg">
             Discover Your Horror Preferences

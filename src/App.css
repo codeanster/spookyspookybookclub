@@ -57,8 +57,9 @@
   50% { transform: translateY(-10px) rotate(5deg); }
 }
 
+/* Cosmic horror background */
 .cosmic-horror-background {
-  background-color: #1b1d24; /* Or any color you want */
+  background-color: #1b1d24;
   position: relative;
   overflow: hidden;
 }
@@ -86,7 +87,7 @@
   animation: float ease-in-out infinite;
 }
 
-/* Add this new style for content sections */
+/* Content section styles */
 .content-section {
   background-color: rgba(30, 33, 43, 0.8); /* Dark, slightly transparent background */
   backdrop-filter: blur(5px); /* Blur effect for depth */
@@ -96,47 +97,36 @@
   margin-bottom: 20px;
 }
 
-
-/* Ensure the grid container forces all children to be the same height */
-.grid {
+/* Grid layout */
+.grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two columns for your grid */
-  gap: 2rem; /* Adjust the gap as needed */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  min-height: 400px; /* Adjust if needed */
+  height: auto; /* Change from 100% to auto */
 }
 
-/* Ensure all direct children of the grid take up full height */
+/* Ensures all direct children of the grid take up full height */
 .grid > div {
   display: flex;
   flex-direction: column;
-  height: 100%; /* Make sure all grid items stretch to full height */
+  /* Removed height: 100%; */
 }
 
-/* Image sizing */
-.card img {
-  width: 100%; /* Ensures image covers the full width */
-  height: auto; /* Keeps aspect ratio */
-  object-fit: cover;
-  border-radius: 0.5rem;
-}
-
-.grid-container {
-  min-height: 400px; /* Or whatever height you want to ensure */
-  height: 100%;
-}
-
+/* Body styles */
 body {
   background-color: #1b1d24; /* Change this to your desired background color */
-  color: white; /* Optional: Ensures text remains readable */
+  color: white; /* Ensures text remains readable */
 }
 
+/* Background gradient */
 .bg-gradient-to-b {
   background-color: #1b1d24 !important; /* Dark background color */
 }
 
-
 /* Ensure all cards are the same size */
 .card {
-  flex-grow: 1; /* Allow the card to grow to fill the grid space */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -146,10 +136,9 @@ body {
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  border: 2px solid rgb(12, 11, 12); /* Adds a pink border */
+  border: 2px solid rgb(12, 11, 12);
 }
 
-/* styles.css */
 
 /* General Styles */
 body {
@@ -294,62 +283,6 @@ button {
 /* Options Column */
 .options-column {
   flex: 0 0 48%; /* Adjust as needed to fit your layout */
-}
-
-/* Option Label */
-.option-label {
-  position: relative;
-  display: block;
-  padding-left: 35px;
-  margin-bottom: 15px;
-  cursor: pointer;
-  user-select: none;
-  font-size: 18px;
-}
-
-/* Input Styles */
-.option-label input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-/* Custom Checkbox */
-.custom-checkbox {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #3b3b3b;
-  border: 1px solid #757575;
-  border-radius: 3px;
-}
-
-/* Checked State */
-.option-label input:checked ~ .custom-checkbox {
-  background-color: #d32f2f;
-}
-
-/* Checkmark for Checkbox */
-.option-label .custom-checkbox::after {
-  content: '';
-  position: absolute;
-  display: none;
-}
-
-.option-label input:checked ~ .custom-checkbox::after {
-  display: block;
-}
-
-.option-label .custom-checkbox::after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
 }
 
 /* Responsive Design for Small Screens */
