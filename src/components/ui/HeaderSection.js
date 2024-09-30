@@ -1,8 +1,13 @@
-import React from 'react';
-import Navbar from './Navbar'; // Import Navbar
-import GlitchText from '../GlitchText'; // Adjust the path if needed
+import React, { useState } from 'react';
+import Navbar from './Navbar';
+import GlitchText from '../GlitchText';
 
 const HeaderSection = ({ imgStyle }) => {
+  const [glitchIntensity, setGlitchIntensity] = useState(0);
+
+  const handleMouseEnter = () => setGlitchIntensity(prev => Math.min(prev + 1, 3));
+  const handleMouseLeave = () => setGlitchIntensity(0);
+
   return (
     <header className="relative text-center py-16 mb-12 overflow-hidden">
       {/* Black Overlay in Header */}
@@ -21,24 +26,28 @@ const HeaderSection = ({ imgStyle }) => {
       
       {/* Header Content */}
       <div className="relative z-10">
-        <h1 className="text-6xl font-bold mb-4 text-pink-500">Spooky Spooky Book Club</h1>
-        {/* <h2 className="text-3xl font-bold" 
+        <h1 
+          className="text-6xl font-bold mb-4" 
           style={{ 
-            color: '#B22222', 
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
-            background: 'linear-gradient(#B22222, #B22222) no-repeat',
-            backgroundSize: '100% 95%',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            filter: 'drop-shadow(0 0 1px #B22222)'
-          }}>
-          Olympia Horror Book Club
-        </h2> */}
-        <GlitchText text="Get Out" />
+            fontFamily: "'Creepster', cursive", 
+            color: '#ff007f', 
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', /* Adds shadow */
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', /* Optional: adds dark transparent background */
+            padding: '10px', 
+            borderRadius: '5px' 
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          Spooky Spooky Book Club
+        </h1>
+
+        <GlitchText text="Get Out" intensity={glitchIntensity} />
+
       </div>
 
       {/* Navbar Positioned Below Header Content */}
-      <div className="relative z-20 mt-4"> {/* Add margin to space it from the header */}
+      <div className="relative z-20 mt-4">
         <Navbar />
       </div>
     </header>

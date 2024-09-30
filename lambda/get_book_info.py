@@ -44,9 +44,12 @@ def lambda_handler(event, context):
             # Execute the query to find the book by title
             cur.execute("""
                 SELECT 
-                    book_id, title, a.author_id, isbn, publication_date, genre_id, description, cover_image_url , a.name as author_name
+
+                    book_id, title, a.author_id, isbn, publication_date, b.description, cover_image_url , a.name as author_name, g.genre_name
+
                 FROM books b
                 JOIN authors a on a.author_id = b.author_id
+                JOIN genres g on b.genre_id = g.genre_id  
                 WHERE title = %s
             """, (title,))
             
@@ -68,10 +71,10 @@ def lambda_handler(event, context):
                 'author_id': book[2],
                 'isbn': book[3],
                 'publication_date': str(book[4]),
-                'genre_id': book[5],
-                'description': book[6],
-                'cover_image_url': book[7],
-                'author_name': book[8]
+                'description': book[5],
+                'cover_image_url': book[6],
+                'author_name': book[7],
+                'genre_name': book[8]  # Added to match the SQL selection
             }
 
             return {

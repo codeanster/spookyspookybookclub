@@ -21,6 +21,9 @@ Parameters:
   GoogleBooksApiKey:
     Type: String
     Description: "API key for Google Books API"
+  OpenAIApiKey:
+    Type: String
+    Description: "API key for OpenAI"
 
 Resources:
   MailingListFunction:
@@ -127,6 +130,22 @@ Resources:
             Path: /welcome
             Method: post
 
+  QuizFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: quiz_response.lambda_handler
+      Runtime: python3.9
+      CodeUri: .
+      Timeout: 30
+      Environment:
+        Variables:
+          OPENAI_API_KEY: !Ref OpenAIApiKey
+      Events:
+        QuizApi:
+          Type: Api
+          Properties:
+            Path: /quiz
+            Method: post
 
 Outputs:
   MailingListApi:
@@ -148,3 +167,7 @@ Outputs:
   WelcomeModalApi:
     Description: "API Gateway endpoint URL for Prod stage for Welcome Modal function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/welcome/"
+
+  QuizApi:
+    Description: "API Gateway endpoint URL for Prod stage for Quiz function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/quiz/"
